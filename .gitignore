@@ -1,0 +1,9 @@
+*.iml
+*.xml
+
+gunicorn_access.log
+gunicorn_error.log
+supervisor_app.conf
+.idea
+__pycache__
+static/images/data_set_test1.0

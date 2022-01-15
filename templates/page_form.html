@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block head %}
+    {#    <meta charset="UTF-8">#}
+    {% block title %}
+        <title>用户信息收集</title>
+    {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {#    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">#}
+    {#    <link rel="stylesheet" href="../static/css/pagestyle4.css">#}
+    {% block bootstrap_css %}
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    {% endblock %}
+    {% block custom_css %}
+        <link rel="stylesheet" href="../static/css/form.css">
+    {% endblock %}
+    {% block style %}
+        <style type="text/css">
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: sans-serif;
+                background-size: cover;
+
+            {#背景图片#} background: url(../static/images/background2.jpg) no-repeat fixed center 0;
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                -moz-background-size: cover;
+                -ms-background-size: cover;
+            }
+
+        </style>
+    {% endblock %}
+
+{% endblock %}
+{% block body %}
+    {% block content %}
+        <script type="text/javascript">
+            $('.alert').fadeOut(1500);
+        </script>
+        {% block flash_message %}
+            <div class="container-wrap">
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        <div class="container-wrap">
+                            <div id='flash_message_container'>
+                                {% for category, msg in messages %}
+                                    <div class="alert alert-{{ category }}">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        {{ msg }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        {% endblock %}
+        {#        <h3>调查问卷</h3>#}
+        {#        <p>本调查问卷仅供四川大学研究使用。</p>#}
+        <div class="alert alert-success">
+            <strong>您已成功完成并提交了一组评估！</strong> 请您填写相关信息。
+        </div>
+        <div class="formpos">
+
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">用户信息调查表</h3>
+                        </div>
+                        <div class="panel-body">
+                            以下信息仅供都江堰城市感知研究所研究使用
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form form-horizontal" method="post" role="form">
+                        {{ form.csrf_token }}
+                        {{ form.gender.label(style='margin-bottom:10px',class_='radio_type') }}<br>
+                        &emsp;
+                        {% for gender in form.gender %}
+                            {{ gender(required='') }}
+                            {{ gender.label }}
+                        {% endfor %}<br>
+
+                        {{ form.age.label(style='margin-top:10px;margin-bottom:10px') }}<br>
+                        &emsp;
+                        {{ form.age }}<br>
+
+                        {{ form.profession.label(style='margin-top:10px;margin-bottom:10px') }}<br>
+                        &emsp;
+                        {{ form.profession }}<br>
+
+                        {{ form.earthquake.label(style='margin-top:10px;margin-bottom:10px') }}<br>
+                        &emsp;
+                        {{ form.earthquake_checkbox_1 }}
+                        {{ form.earthquake_checkbox_1.label(style='margin-top:10px') }}<br>
+                        &emsp;
+                        {{ form.earthquake_checkbox_2 }}
+                        {{ form.earthquake_checkbox_2.label(style='margin-top:10px') }}<br>
+                        &emsp;
+                        {{ form.earthquake_checkbox_3 }}
+                        {{ form.earthquake_checkbox_3.label(style='margin-top:10px') }}<br>
+                        &emsp;
+                        {{ form.earthquake_checkbox_4 }}
+                        {{ form.earthquake_checkbox_4.label(style='margin-top:10px') }}<br>
+
+                        {{ form.living.label(style='margin-top:10px;margin-bottom:10px') }}<br>
+                        &emsp;
+                        {% for living in form.living %}
+                            {{ living(required='') }}
+                            {{ living.label }}
+                            &emsp;&emsp;&emsp;
+                        {% endfor %}<br>
+
+                        {{ form.travel.label(style='margin-top:10px;margin-bottom:10px') }}<br>
+                        &emsp;
+                        {% for travel in form.travel %}
+                            {{ travel(required='') }}
+                            {{ travel.label }}&emsp;&emsp;&emsp;
+                        {% endfor %}<br>
+
+                        {{ form.feedback.label(style='margin-top:10px;margin-bottom:10px') }}<br>
+
+
+                        {{ form.feedback }}<br>
+
+                        <div class="submit-btn">
+                            {{ form.submit(class='button button1 btn-lg btn-primary') }}<br>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="card-footer bg-dark text-white"><p>感谢您的配合与参与，祝您生活愉快！</p></div>
+            </div>
+
+        </div>
+    {% endblock %}
+{% endblock %}

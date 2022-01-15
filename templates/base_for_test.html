@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+{#导航栏模板#}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+
+        <title>都江堰城市空间研究</title>
+    {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css') }}">
+    {% block custom_css %}
+
+    {% endblock %}
+</head>
+
+<body>
+
+<script src="{{ url_for('static',filename='js/jquery-3.6.0.js') }}"></script>
+<script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/popper.js') }}"></script>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark navbar-fixed-top ">
+    <a class="navbar-brand" href="{{ url_for('index') }}">都江堰城市感知计算研究</a>
+</nav>
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

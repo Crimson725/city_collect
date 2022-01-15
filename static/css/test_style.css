@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-size: cover;
+
+    background: url(../images/test_background.jpg) no-repeat fixed center 0;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+
+}
+
+img {
+    cursor: pointer;
+    border: solid 5px indianred;
+    border-radius: 30px;
+}
+
+.ss {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100vh;
+    height: 240px;
+    margin: 2rem auto 0;
+}
+
+/*图片大小改width*/
+.ss-col-content {
+    width: 75vh;
+    padding-top: 0vh;
+    position: relative;
+    overflow: hidden;
+    height: 240px;
+}
+
+.ss-col-content-child {
+    /*display: flex;*/
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 80%;
+    transition: -webkit-transform 400ms ease-out;
+    transition: transform 400ms ease-out, -webkit-transform 400ms ease-out;
+}
+
+.ss-col-content-child.odd {
+    flex-direction: column;
+}
+
+.ss-img {
+    display: block;
+    position: relative;
+    width: 120%;
+    height: 240px;
+    -o-object-fit: contain;
+
+}
+
+.modal-content {
+    width: fit-content;
+    padding: 0.2rem 0.4rem;
+}

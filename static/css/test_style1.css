@@ -1,0 +1,93 @@
+.ss {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100vh;
+    /*margin: 2rem auto 0;*/
+}
+/*图片大小改width*/
+.ss-col-content {
+    width: 100vh;
+    padding-top: 0vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.ss-col-content-child {
+    /*display: flex;*/
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 80%;
+    transition: -webkit-transform 400ms ease-out;
+    transition: transform 400ms ease-out;
+    transition: transform 400ms ease-out, -webkit-transform 400ms ease-out;
+}
+
+.ss-col-content-child.odd {
+    flex-direction: column;
+}
+
+.ss-img {
+    display: block;
+    position: relative;
+    width: 120%;
+    height: 80vh;
+    -o-object-fit: contain;
+    object-fit: contain;
+    /*justify-content: center;*/
+}
+
+/*按钮设计改这里*/
+.ss-controls {
+    justify-content: center;
+    position: absolute;
+    bottom: -5vh;
+    left: 50%;
+    -webkit-transform: translate(-50%, 50%);
+/*            transform: translate(-50%, 50%);*/
+    display: flex;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+
+.ss-controls-check {
+    justify-content: center;
+    position: absolute;
+    bottom: -10vh;
+    left: 50%;
+    -webkit-transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%);
+    display: flex;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+/*.ss-controls-btn {*/
+/*  width: 3.5rem;*/
+/*  height: 2.5rem;*/
+/*  line-height: 2.5rem;*/
+/*  border: none;*/
+/*  cursor: pointer;*/
+/*  text-transform: uppercase;*/
+/*  font-size: 0.8rem;*/
+/*}*/
+.ss-controls-btn:hover, .ss-controls-btn:focus {
+    outline: none;
+    color: #aaa;
+}
+
+/*.submit {*/
+/*    justify-content: center;*/
+/*    margin-top: 90px;*/
+/*    margin-left: 10px;*/
+/*}*/
+
+.modal-content {
+    width: fit-content;
+    padding: 0.2rem 0.4rem;
+}

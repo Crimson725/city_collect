@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{#导航栏模板#}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+        <title>都江堰城市空间研究</title>
+    {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css') }}">
+    {% block custom_css %}
+
+    {% endblock %}
+</head>
+
+<body>
+
+<script src="{{ url_for('static',filename='js/jquery-3.6.0.js') }}"></script>
+<script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/popper.js') }}"></script>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark navbar-fixed-top ">
+    <a class="navbar-brand" href="{{ url_for('index') }}">都江堰城市感知计算研究</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" data-toggle="modal" data-target="#myModal1">帮助信息</a>#}
+{#            </li>#}
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#myModal2">联系我们</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{#<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+{#    <div class="modal-dialog">#}
+{#        <div class="modal-content">#}
+{#            <div class="modal-header">#}
+{#                <h1 class="modal-title" id="myModalLabel">#}
+{#                    帮助信息#}
+{#                </h1>#}
+{#            </div>#}
+{#            <div class="modal-body">#}
+{#                <h4><strong>说明：</strong><br></h4>#}
+{#                <h4>都江堰城市感知计算研究平台系四川大学灾后重建与管理学院课题组项目调研所搭建的网络信息平台，本文档将更好帮助您使用这一平台。有关本项目的更多信息和联系方式，您可以通过点击标题栏中的<strong>联系我们</strong>获取详情。<br>#}
+{#                    本平台为手机端/PC端通用。当您进入平台首页后，请点击页面中央的<strong>点此开始进行测试</strong>按钮开始测试评估。<br>#}
+{#                    平台将自动跳转至测试页面。在这一页面中，您将看到一组由两张图片构成的比较组合。请根据您的直观感受，在两张图片中选择更符合描述的图片。选择完毕后，请点击<strong>下一组</strong>按钮以继续测试。当您完成对全部图片的判断，或希望提前结束测试时，请点击<strong>提交</strong>按钮，以完成测试评估。<br>#}
+{#                    评估完成后，为充分保障样本收集的有效性，需要您进一步填写有关您的具体信息，请按自身实际情况如实填写。也欢迎您在问卷中留下对于项目开展过程中的宝贵意见或建议，十分感谢您的配合与参与，祝您生活愉快！<br>#}
+{#                </h4>#}
+{#            </div>#}
+{#            <div class="modal-footer">#}
+{#                <button type="button" class="btn btn-danger" data-dismiss="modal">关闭#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">
+                    联系我们
+                </h1>
+            </div>
+            <div class="modal-body">
+                <strong>四川大学灾后重建与管理学院</strong><br>
+                <strong>地址：</strong>成都市双流区黄河中路一段122号<br>
+                <strong>办公室电话：</strong>+86 (028)85996656<br>
+                <strong>教学教务办公室：</strong>+86 (028)85996595<br>
+                <strong>院长邮箱：</strong>kalonji@scu.edu.cn<br>
+                <strong>书记邮箱：</strong>idmroffice@scu.edu.cn<br>
+                <strong>邮编：</strong>610207<br>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

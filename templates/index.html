@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-size: cover;
+        {#背景更改#} background: url(../static/images/test_background.jpg) no-repeat fixed center 0;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+
+        }
+
+        .d {
+            width: 200px;
+            height: 350px;
+            margin-top: 180px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <div class="container">
+        <h1 class="display-3 text-center" style="color:indianred;margin-top:50px"><strong>都江堰城市安全感知计算研究</strong></h1>
+        <hr>
+        <h4 style="color:black">
+            <strong>该平台系四川大学灾后重建与管理学院课题组所搭建的数据采集平台。</strong>
+            <hr>
+            <strong>点击下方按钮进行测试</strong>
+
+        </h4>
+        <hr>
+        <h4 style="color:black">
+            在测试页面中，请根据您的直观感受，在呈现的两张图片中选择一张更符合描述的图片。选择完毕后，请点击<strong
+                style="color:red">下一组</strong>按钮以继续测试。当您完成对全部图片的判断，点击<strong
+                style="color:black">提交</strong>按钮，以完成测试评估。
+        </h4>
+    </div>
+
+    <div class="d text-center">
+        <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal1">开始</a>
+    </div>
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="myModalLabel">
+                        <strong>请仔细阅读该说明</strong>
+                    </h1>
+                </div>
+                <div class="modal-body">
+                    <h4>
+                        若想查询该项目组的联系方式，可以通过点击首页标题栏中的<strong>联系我们</strong>获取详情。
+                        <hr>
+                        请等待右侧边框中的图片加载完毕后再开始测试！
+{#                        <hr>#}
+{#                        如果您测试有障碍，请点击<strong>黄色按钮</strong>，否则请点击<strong>蓝色按钮</strong>!#}
+                        <hr>
+                        测试完毕后，需要您进一步填写个人相关信息，也欢迎您在问卷中留下对该平台的宝贵意见或建议。
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" href="{{ url_for("test") }}">了解了！
+                    </a>
+{#                    <a class="btn btn-warning" href="{{ url_for("test") }}">了解了！#}
+{#                    </a>#}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
