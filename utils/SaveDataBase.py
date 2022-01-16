@@ -51,13 +51,11 @@ class SaveImgInfo:
         sql = 'UPDATE image_dic SET safe =' + str(data) + ' WHERE PID = ' + str(id)
         self.cursor.execute(sql)
         self.db.commit()
-        print("update")
 
     def update_data_unsafe(self, data, id):
         sql = 'UPDATE image_dic SET unsafe =' + str(data) + ' WHERE PID = ' + str(id)
         self.cursor.execute(sql)
         self.db.commit()
-        print("updated")
 
     # 关闭数据库连接
     def close(self):
