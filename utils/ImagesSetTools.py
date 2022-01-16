@@ -4,7 +4,7 @@ import numpy as np
 from utils.SaveDataBase import SaveImgSet
 
 # 图片总共的个数
-DICT_NUM = 264
+DICT_NUM = 586
 
 
 class GenerateRandom:
@@ -59,7 +59,7 @@ def dataset_generator(path):
             ls.append(file_path)
     random.shuffle(ls)
     count = len(ls) // 2
-    length = len("images/dataset2.0/") + 1
+    length = len("images/data_set_test2.0/") + 1
     ls_ret = []
     for i in ls:
         i = i.split('.')[1][4:-3] + i.split('.')[1][-1]
