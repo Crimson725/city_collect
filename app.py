@@ -43,14 +43,14 @@ def index():
 # 过滤器
 @app.template_filter('get_name')
 def get_name(str):
-    length2 = len("images/data_set_test1.0/") + 1
+    length2 = len("images/dataset2.0/") + 1
     return str[length2:-1] + "g"
 
 
 # 城市安全测试界面(正常用户）
 @app.route('/test', methods=['GET', 'POST'])
 def test():
-    src_path = "./static/images/data_set_test1.0"
+    src_path = "./static/images/dataset2.0"
     generator = GenerateRandom()
     cur_id = generator.process()
     path = src_path + "/" + str(cur_id)
