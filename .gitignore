@@ -7,3 +7,4 @@ supervisor_app.conf
 .idea
 __pycache__
 static/images/data_set_test1.0
+utils/init_db.py
