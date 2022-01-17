@@ -22,14 +22,14 @@ img {
     position: relative;
     display: flex;
     justify-content: center;
-    width: 100vh;
+    width: 640px;
     height: 240px;
     margin: 2rem auto 0;
 }
 
 /*图片大小改width*/
 .ss-col-content {
-    width: 75vh;
+    width: 640px;
     padding-top: 0vh;
     position: relative;
     overflow: hidden;
