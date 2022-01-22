@@ -12,25 +12,35 @@ def age_for_save(age):
 
 
 def profession_for_save(profession):
+    profession=int(profession)
     if profession == 1:
-        return '党政机关工作人员'
-    elif profession == 2:
-        return '社会生产服务和生活服务人员'
-    elif profession == 3:
         return '农、林、牧、渔业生产及辅助人员'
-    elif profession == 4:
+    elif profession == 2:
         return '生产制造及有关人员'
+    elif profession == 3:
+        return '建筑业及辅助人员'
+    elif profession == 4:
+        return '金融业及有关人员'
     elif profession == 5:
-        return '科学研究工作者'
+        return '信息传输、软件和信息技术服务业'
     elif profession == 6:
-        return '教育互联网从业者'
+        return '教育、科学研究和技术服务业'
     elif profession == 7:
-        return '青少年及在校学生'
+        return '水利、环境和公共设施管理业'
     elif profession == 8:
-        return '不便分类的其他从业人员'
-    else:
+        return '交通运输、仓储和邮政业'
+    elif profession == 9:
+        return '卫生和社会工作及辅助人员'
+    elif profession == 10:
+        return '餐饮、住宿、文化、体育和娱乐业'
+    elif profession == 11:
+        return '公共管理、社会保障和社会（国际）组织'
+    elif profession == 12:
+        return '青年及在校学生'
+    elif profession == 13:
         return '失业、无业或退休人员'
-
+    else:
+        return None     
 
 def earthquake_for_save(earthquake):
     s1 = '经历过512大地震'

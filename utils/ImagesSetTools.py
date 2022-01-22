@@ -1,40 +1,7 @@
 import os
 import random
-import numpy as np
 from utils.SaveDataBase import SaveImgSet
 
-# 图片总共的个数
-DICT_NUM = 586
-
-
-class GenerateRandom:
-    num = 0
-    unused = np.zeros(int(np.ceil(DICT_NUM / 40)))
-
-    def __init__(self):
-        # 打开数据库连接
-        db = SaveImgSet()
-
-        self.index = 0  # 被选中的文件夹的名称
-        self.num = np.sum(self.unused)
-        if self.num == 0:
-            self.unused[self.index] += 1
-            self.res = self.index
-            db.update_data(data=int(self.unused[self.index]), id=int(self.res))
-        else:
-            if self.unused[self.unused.argmin()] == 0:
-                self.index = self.num
-                self.unused[int(self.index)] += 1
-                self.res = int(self.index)
-                db.update_data(data=int(self.unused[int(self.index)]), id=int(self.res))
-            else:
-                self.cur_id = self.unused.argmin()
-                self.unused[self.cur_id] += 1
-                self.res = self.cur_id
-                db.update_data(data=int(self.unused[self.cur_id]), id=int(self.res))
-
-    def process(self):
-        return self.res
 
 
 def dataset_generator(path):
@@ -73,4 +40,4 @@ def dataset_generator(path):
         set_2.append(file)
         name_set_2.append(file[length:-1])
     # 每次取两个
-    return set_1, set_2, name_set_1, name_set_2, count
+    return set_1, set_2, name_set_1, name_set_2

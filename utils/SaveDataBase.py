@@ -1,5 +1,5 @@
 import pymysql
-
+import re
 
 class SaveForm:
     count = 0
@@ -42,7 +42,7 @@ class SaveImgInfo:
         self.cursor = self.db.cursor()
 
     def get_data(self, id):
-        sql = 'SELECT * FROM image_dic WHERE PID =' + str(id)
+        sql = 'SELECT * FROM image_dic WHERE PID = ' + str(id)
         self.cursor.execute(sql)
         result = self.cursor.fetchone()
         return result
@@ -70,6 +70,12 @@ class SaveImgSet:
             passwd="13678422587",
             database="city")
         self.cursor = self.db.cursor()
+
+    def get_data(self, id):
+        sql = 'SELECT * FROM image_set WHERE PSID =' + str(id)
+        self.cursor.execute(sql)
+        result = self.cursor.fetchone()
+        return result[2]
 
     def update_data(self, data, id):
         sql = 'UPDATE image_set SET select_num =' + str(data) + ' WHERE PSID = ' + str(id)

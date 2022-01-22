@@ -1,13 +1,16 @@
+from email.mime import image
+import random
 from flask import Flask, render_template, url_for, redirect, request, flash, session
 from utils.UserForm import UserForm
-from utils.SaveDataBase import SaveForm, SaveImgInfo
+from utils.SaveDataBase import SaveForm, SaveImgInfo,SaveImgSet
 from utils.ProcessData import age_for_save, profession_for_save, living_for_save, travel_for_save
-from utils.ImagesSetTools import dataset_generator, GenerateRandom
+from utils.ImagesSetTools import dataset_generator
 from wsgiref.simple_server import make_server
 from datetime import timedelta
 from werkzeug.middleware.proxy_fix import ProxyFix
 import json
 import numpy as np
+import re
 
 app = Flask(__name__)
 app.send_file_max_age_default = timedelta(seconds=1)
@@ -43,26 +46,31 @@ def index():
 # 过滤器
 @app.template_filter('get_name')
 def get_name(str):
-    length2 = len("images/data_set_test2.0/") + 1
-    return str[length2:-1] + "g"
+    last = re.findall("[^\/]+$",str)[0]
+    return last
 
 
 # 城市安全测试界面(正常用户）
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     src_path = "./static/images/data_set_test2.0"
-    generator = GenerateRandom()
-    cur_id = generator.process()
+    cur_id = random.randint(0,14)
+    generator=SaveImgSet()
+    select_num=generator.get_data(cur_id)+1
+    generator.update_data(select_num,cur_id)
     path = src_path + "/" + str(cur_id)
-    session['judge_num'] = json.dumps(cur_id, cls=NpEncoder)
-    graph_set_1, graph_set_2, graph_name_1, graph_name_2, count = dataset_generator(path)
+
+    graph_set_1, graph_set_2, graph_name_1, graph_name_2 = dataset_generator(path)
     ls_1 = []
     ls_2 = []
     for i in graph_set_1:
-        i = i[26:-7] + i[-5]
+        # print(i)
+        i = re.findall("[^\/]+$",i)[0]
+        i=i[0:-7]+i[-5]
         ls_1.append(i)
     for i in graph_set_2:
-        i = i[26:-7] + i[-5]
+        i = re.findall("[^\/]+$",i)[0]
+        i=i[0:-7]+i[-5]
         ls_2.append(i)
     if request.json:
         # 对传回的数据进行处理，存入数据库
@@ -70,7 +78,7 @@ def test():
         db = SaveImgInfo()
         # 处理被认为是安全的图片
         for i in range(len(data)):
-            img_safe = (data[i]['name'].split('.')[0][0:-3] + data[i]['name'].split('.')[0][-1])[1:]
+            img_safe = data[i]['name'][0:-7]+data[i]['name'][-5]
             if img_safe in ls_1:
                 # 安全处理
                 safe_info = db.get_data(img_safe)
@@ -90,46 +98,8 @@ def test():
                 unsafe_info = db.get_data(img_unsafe)
                 unsafe = unsafe_info[2] + 1
                 db.update_data_unsafe(unsafe, img_unsafe)
-    return render_template('image_test.html', set_1=graph_set_1, set_2=graph_set_2, name_set_1=graph_name_1,
-                           name_set_2=graph_name_2)
-
-
-# 测试界面二 接口
-@app.route('/test_spec', methods=['GET', 'POST'])
-def test_spec():
-    src_path = "./static/images/data_set_test"
-    generator = GenerateRandom()
-    cur_id = generator.process()
-    path = src_path + "/" + str(cur_id)
     session['judge_num'] = json.dumps(cur_id, cls=NpEncoder)
-
-    # path = './static/images/data_set_test'
-    graph_set_1, graph_set_2, graph_name_1, graph_name_2 = dataset_generator(path)
-    res1 = dict.fromkeys(graph_name_1, 0)
-    res2 = dict.fromkeys(list(reversed(graph_name_2)), 0)
-    if request.json:
-        # 对传回的数据进行处理，存入数据库
-        data = request.json
-        db = SaveImgInfo()
-        for i in range(len(data)):
-            # 处理被认为是安全的图片
-            # print("-"*10)
-            # print(data)
-            img = data[i]['name'].split('.')[0].split('/')[1]
-            # print(img)
-            number = "".join(list(filter(str.isdigit, img)))
-            if "-" in img:
-                # print("为负的！")
-                number = number + str(1)
-            # db.get_data(number) #当把图片文件夹建好，图片和文件夹数据库初始化好之后，把622180换成number
-            info = db.get_data(number)
-            safe = info[1] + 1
-            unsafe = info[2]
-            skip = info[3]
-            db.update_data(safe, number)
-        # print("data", request.json)
-
-    return render_template('image_test_spec.html', set_1=graph_set_1, set_2=graph_set_2, name_set_1=graph_name_1,
+    return render_template('image_test.html', set_1=graph_set_1, set_2=graph_set_2, name_set_1=graph_name_1,
                            name_set_2=graph_name_2)
 
 
