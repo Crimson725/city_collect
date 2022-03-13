@@ -54,7 +54,8 @@ def get_name(str):
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     src_path = "./static/images/data_set_test2.0"
-    cur_id = random.randint(0,14)
+    cur_id = random.randint(0,9)
+    # cur_id=10
     generator=SaveImgSet()
     select_num=generator.get_data(cur_id)+1
     generator.update_data(select_num,cur_id)
