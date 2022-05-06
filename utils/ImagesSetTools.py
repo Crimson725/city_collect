@@ -24,7 +24,7 @@ def dataset_generator(path):
             # 路径转换
             file_path = file_path.replace('\\', '/').lstrip(".").lstrip("/stati").lstrip("c/")
             ls.append(file_path)
-    print(ls)
+    # print(ls)
     random.shuffle(ls)
     count = len(ls) // 2
     length = len("images/data_set_test3.0/") + 1

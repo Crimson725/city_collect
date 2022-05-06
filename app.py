@@ -54,7 +54,7 @@ def get_name(str):
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     src_path = "./static/images/data_set_test3.0"
-    cur_id = random.randint(29)
+    cur_id = random.randint(0,29)
     # cur_id=10
     generator=SaveImgSet()
     select_num=generator.get_data(cur_id)+1
@@ -69,22 +69,22 @@ def test():
         i = re.findall("[^\/]+$",i)[0]
         i=i.split(".")[0]
         ls_1.append(i)
-    print("ls_1")
-    print(ls_1)
     for i in graph_set_2:
         i = re.findall("[^\/]+$",i)[0]
         i=i.split(".")[0]
         ls_2.append(i)
-    print("ls_2")
-    print(ls_2)
     if request.json:
         # 对传回的数据进行处理，存入数据库
         data = request.json
         db = SaveImgInfo()
         # 处理被认为是安全的图片
         for i in range(len(data)):
-            img_safe = data[i]['name'][0:-7]+data[i]['name'][-5]
+            print(ls_1)
+            print(ls_2)
+            img_safe = data[i]['name'].split(".")[0]
+            print(img_safe)
             if img_safe in ls_1:
+                print("执行安全处理")
                 # 安全处理
                 safe_info = db.get_data(img_safe)
                 safe = safe_info[1] + 1
@@ -104,7 +104,8 @@ def test():
                 unsafe = unsafe_info[2] + 1
                 db.update_data_unsafe(unsafe, img_unsafe)
     session['judge_num'] = json.dumps(cur_id, cls=NpEncoder)
-    return render_template('image_test.html', set_1=graph_set_1, set_2=graph_set_2)
+    return render_template('image_test.html', set_1=graph_set_1, set_2=graph_set_2, name_set_1=graph_name_1,
+                           name_set_2=graph_name_2)
 
 
 # 用户提交信息界面

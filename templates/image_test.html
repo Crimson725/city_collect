@@ -1,134 +1,118 @@
-{% extends 'base_for_test.html' %}
+{% extends 'base_for_test.html' %} {% block head %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> {% block title %}
+<title>测试页面</title>
+{% endblock %} {% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/test_style.css') }}"> {% endblock %} {% endblock %} {% block body %} {% block content %}
+<script src="{{ url_for('static',filename='js/change.js') }}" defer="defer"></script>
+<script type="text/javascript" defer="defer">
+    var flag = 0;
+    var safe_data = []
+    var unsafe_
 
-{% block head %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %}
-        <title>测试页面</title>
-    {% endblock %}
-    {% block custom_css %}
-        <link rel="stylesheet" href="{{ url_for('static',filename='css/test_style.css') }}">
-    {% endblock %}
-{% endblock %}
-
-{% block body %}
-    {% block content %}
-        <script src="{{ url_for('static',filename='js/change.js') }}" defer="defer"></script>
-        <script type="text/javascript" defer="defer">
-            var flag = 0;
-            var data = []
-
-            function onclickFunLeft(obj1) {
-                var name = $(obj1).attr("id");
-                var src = $(obj1).attr("src");
-                console.log(src)
-                flag = 1;
-                var arr = {
-                    "name": name,
-                    "flag": flag
-                }
-                data.push(arr);
+    function onclickFunLeft(obj1) {
+        var name = $(obj1).attr("id");
+        var src = $(obj1).attr("src");
+        console.log(src)
+        flag = 1;
+        var arr = {
+            "name": name,
+            "flag": flag
+        }
+        data.push(arr);
 
 
-            }
+    }
 
-            function onclickFunRight(obj2) {
-                flag = 2;
-                var name = $(obj2).attr("id");
-                var arr = {
-                    "name": name,
-                    "flag": flag
-                }
-                data.push(arr);
+    function onclickFunRight(obj2) {
+        flag = 2;
+        var name = $(obj2).attr("id");
+        var arr = {
+            "name": name,
+            "flag": flag
+        }
+        data.push(arr);
 
-            }
+    }
 
-            function sendData() {
-                window.location.href = '/forms'
-                $.ajax({
-                    url: '',
-                    dataType: 'json',
-                    type: 'POST',
-                    async: true,
-                    data: JSON.stringify(data),
-                    processData: false,
-                    contentType: "application/json",
-                    headers: {},
-                    success: function (data) {
-                        if (data['status'] == 200) {
-                            var r = confirm(data['msg']);
-                            if (r == true) {
-                                console.log("success")
-                            } else {
-                                console.log("fail")
-                            }
-                        } else {
-                            alert(data['msg'])
-                        }
+    function sendData() {
+        window.location.href = '/forms'
+        $.ajax({
+            url: '',
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            data: JSON.stringify(data),
+            processData: false,
+            contentType: "application/json",
+            headers: {},
+            success: function(data) {
+                if (data['status'] == 200) {
+                    var r = confirm(data['msg']);
+                    if (r == true) {
+                        console.log("success")
+                    } else {
+                        console.log("fail")
                     }
-                })
+                } else {
+                    alert(data['msg'])
+                }
             }
+        })
+    }
 
-            function book() {
-                $('#myModal').modal('show');
-                setTimeout(function () {
-                    $("#myModal").modal("hide")
-                }, 1200);
-            }
-        </script>
+    function book() {
+        $('#myModal').modal('show');
+        setTimeout(function() {
+            $("#myModal").modal("hide")
+        }, 1200);
+    }
+</script>
 
-        <div class="alert alert-danger>" role="alert">
-            <h1 class="alert-heading text-danger">注意!请根据你的主观感受，选择自己认为较为<strong>安全</strong>的一张图片！</h1>
-            <p class="text-danger"> 请等待<strong>下方边框</strong>中的图片加载完成后再开始测试！</p>
-            <hr>
-            <p class="text-danger"> 请<strong>点击选择边框内</strong>的图片，一组测试中仅选择一次</p>
-            <hr>
-            <p class="mb-0 text-success"><strong>然后，点击下一组按钮进行下一次测试！</strong></p>
-        </div>
+<div class="alert alert-danger>" role="alert">
+    <h1 class="alert-heading text-danger">注意!请根据你的主观感受，选择自己认为较为<strong>安全</strong>的一张图片！</h1>
+    <p class="text-danger"> 请等待<strong>下方边框</strong>中的图片加载完成后再开始测试！</p>
+    <hr>
+    <p class="text-danger"> 请<strong>点击选择边框内</strong>的图片，一组测试中仅选择一次</p>
+    <hr>
+    <p class="mb-0 text-success"><strong>然后，点击下一组按钮进行下一次测试！</strong></p>
+</div>
 
-        <div class="ss row">
-            <div class="ss-col">
-                <div class="ss-col-content">
-                    <div class="ss-col-content-child js-ss-col-even">
-                        {% for path in set_1 %}
-                            <img class="ss-img img-responsive" data-toggle="modal" data-target="#myModal"
-                                 id={{ path|get_name }} src="{{ url_for("static",filename=path) }}"
-                                 style="CURSOR: hand" onclick='onclickFunLeft(this);book()'>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            <div class="ss-col">
-                <div class="ss-col-content ">
-                    <div class="ss-col-content-child odd js-ss-col-odd">
-                        {% for path in set_2[::-1] %}
-                            <img class="ss-img img-responsive" data-toggle="modal" data-target="#myModal"
-                                 id={{ path|get_name }} src="{{ url_for("static",filename=path) }}"
-                                 style="CURSOR: hand" onclick='onclickFunRight(this);book()'>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="ss-controls">
-                <div class="btn-group btn-group-lg">
-                    <button class="ss-controls-btn btn btn-primary prev js-ss-prev">上一组</button>
-                    <button class="ss-controls-btn btn btn-primary next js-ss-next">下一组</button>
-                    <button class="btn btn-danger" id="jump" onclick="sendData()">提交</button>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="modal fade bd-example-modal-sm" id="myModal" role="dialog" data-backdrop="static"
-             style="overflow: auto">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    已选择！ 请点击”下一组“按钮！
-                </div>
+<div class="ss row">
+    <div class="ss-col">
+        <div class="ss-col-content">
+            <div class="ss-col-content-child js-ss-col-even">
+                {% for path in set_1 %}
+                <img class="ss-img img-responsive" data-toggle="modal" data-target="#myModal" id={{ path|get_name }} src="{{ url_for(" static ",filename=path) }}" style="CURSOR: hand" onclick='onclickFunLeft(this);book()'> {% endfor %}
             </div>
         </div>
+    </div>
+    <div class="ss-col">
+        <div class="ss-col-content ">
+            <div class="ss-col-content-child odd js-ss-col-odd">
+                {% for path in set_2[::-1] %}
+                <img class="ss-img img-responsive" data-toggle="modal" data-target="#myModal" id={{ path|get_name }} src="{{ url_for(" static ",filename=path) }}" style="CURSOR: hand" onclick='onclickFunRight(this);book()'> {% endfor %}
+            </div>
+        </div>
+    </div>
 
-    {% endblock %}
-{% endblock %}
+    <div class="ss-controls">
+        <div class="btn-group btn-group-lg">
+            <button class="ss-controls-btn btn btn-primary prev js-ss-prev">上一组</button>
+            <button class="ss-controls-btn btn btn-primary next js-ss-next">下一组</button>
+            <button class="btn btn-danger" id="jump" onclick="sendData()">提交</button>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade bd-example-modal-sm" id="myModal" role="dialog" data-backdrop="static" style="overflow: auto">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            已选择！ 请点击”下一组“按钮！
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% endblock %}

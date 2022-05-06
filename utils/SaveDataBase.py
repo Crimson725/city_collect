@@ -9,7 +9,7 @@ class SaveForm:
             host="localhost",
             user="root",
             passwd="13678422587",
-            database="city")
+            database="city2")
         self.count += 1
 
     def add_form(self, form):
@@ -38,7 +38,7 @@ class SaveImgInfo:
             host="localhost",
             user="root",
             passwd="13678422587",
-            database="city")
+            database="city2")
         self.cursor = self.db.cursor()
 
     def get_data(self, id):
@@ -68,7 +68,7 @@ class SaveImgSet:
             host="localhost",
             user="root",
             passwd="13678422587",
-            database="city")
+            database="city2")
         self.cursor = self.db.cursor()
 
     def get_data(self, id):
