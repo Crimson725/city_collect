@@ -1,6 +1,6 @@
 import os
 import random
-from utils.SaveDataBase import SaveImgSet
+# from utils.SaveDataBase import SaveImgSet
 
 
 
@@ -24,13 +24,10 @@ def dataset_generator(path):
             # 路径转换
             file_path = file_path.replace('\\', '/').lstrip(".").lstrip("/stati").lstrip("c/")
             ls.append(file_path)
+    print(ls)
     random.shuffle(ls)
     count = len(ls) // 2
-    length = len("images/data_set_test2.0/") + 1
-    ls_ret = []
-    for i in ls:
-        i = i.split('.')[1][4:-3] + i.split('.')[1][-1]
-        ls_ret.append(i)
+    length = len("images/data_set_test3.0/") + 1
     for i in range(count):
         file = ls.pop()
         set_1.append(file)
@@ -41,3 +38,8 @@ def dataset_generator(path):
         name_set_2.append(file[length:-1])
     # 每次取两个
     return set_1, set_2, name_set_1, name_set_2
+if __name__ == "__main__":
+    cur_id=0
+    src_path = "./static/images/data_set_test2.0"
+    path = src_path + "/" + str(cur_id)
+    dataset_generator(path)

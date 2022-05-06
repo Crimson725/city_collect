@@ -53,8 +53,8 @@ def get_name(str):
 # 城市安全测试界面(正常用户）
 @app.route('/test', methods=['GET', 'POST'])
 def test():
-    src_path = "./static/images/data_set_test2.0"
-    cur_id = random.randint(0,9)
+    src_path = "./static/images/data_set_test3.0"
+    cur_id = random.randint(29)
     # cur_id=10
     generator=SaveImgSet()
     select_num=generator.get_data(cur_id)+1
@@ -67,12 +67,16 @@ def test():
     for i in graph_set_1:
         # print(i)
         i = re.findall("[^\/]+$",i)[0]
-        i=i[0:-7]+i[-5]
+        i=i.split(".")[0]
         ls_1.append(i)
+    print("ls_1")
+    print(ls_1)
     for i in graph_set_2:
         i = re.findall("[^\/]+$",i)[0]
-        i=i[0:-7]+i[-5]
+        i=i.split(".")[0]
         ls_2.append(i)
+    print("ls_2")
+    print(ls_2)
     if request.json:
         # 对传回的数据进行处理，存入数据库
         data = request.json
@@ -100,8 +104,7 @@ def test():
                 unsafe = unsafe_info[2] + 1
                 db.update_data_unsafe(unsafe, img_unsafe)
     session['judge_num'] = json.dumps(cur_id, cls=NpEncoder)
-    return render_template('image_test.html', set_1=graph_set_1, set_2=graph_set_2, name_set_1=graph_name_1,
-                           name_set_2=graph_name_2)
+    return render_template('image_test.html', set_1=graph_set_1, set_2=graph_set_2)
 
 
 # 用户提交信息界面
