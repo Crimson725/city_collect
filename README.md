@@ -1,17 +1,18 @@
-# 项目用数据收集网站
+# Crowdsourced Data Collection Website for Urban Safety Perception
 
-## 更改数据集
+# Custom Dataset
 
-- 将数据集文件夹放置于 `/static/images/`
-- 数据集文件夹子文件夹命名从0开始
-- 根据要求修改 `app.py`，`init_db.py`，`ImageSetTools.py`，`SaveDataBase.py`中的相关代码（数据库连接，文件名截取等）
-- 若参考本项目的数据集配置方式，启动前首先执行 `init_db.py`
+- Place your dataset folder in `/static/images/`.
+- Place your dataset folder in `/static/images/`.
+- Subfolders of the dataset folder should be named starting from 0.
+- Modify the relevant code in `app.py`, `init_db.py`, `ImageSetTools.py`, and `SaveDataBase.py` as per your requirements (database connections, file name truncation, etc.).
+- If you are referencing the dataset configuration of this project, run `init_db.py` before starting.
 
-## 执行/debug
+## Execution/Debug
 
-本项目使用Flask框架
+This project uses the Flask framework.
 
-**本地执行**
+**Run Locally**
 
 ```bash
 git clone https://github.com/Crimson725/city_collect.git
@@ -20,8 +21,7 @@ cd city_collect
 flask run
 ```
 
-
-若在执行时启用热加载调试需在 `app.py 进行修改`
+If you want to enable hot-reloading during execution, make the following modification in `app.py`:
 
 ```python
 
@@ -29,24 +29,25 @@ if __name__ == '__main__':
     server = make_server('127.0.0.1', 5000, app)
     server.serve_forever()
     app.wsgi_app = ProxyFix(app.wsgi_app)
-# 修改此处 debug=True
+    //...
     app.run(debug=True)
 
 ```
 
-## 安装依赖
+## Install Dependencies
+
 
 ```
 pip install -r requirements.txt
 ```
 
-## 网站部署启动
+## Deployment and Launch
 
 ```
-gunicorn app:app -c gunicorn.py       
+gunicorn app:app -c gunicorn.py     
 ```
 
-### 部署注意
+### Notes When Deploying
 
-- 需要自行配置nginx
-- 修改 `gunicorn.py`内的部署设置
+- Configure Nginx.
+- Modify the deployment settings within gunicorn.py.
